@@ -33,6 +33,27 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
+                label: 'Release',
+                icon: 'pi pi-send',
+                items: [
+                    {
+                        label: 'Plan Release',
+                        icon: 'pi pi-fw pi-send',
+                        routerLink: ['/']
+                    },
+                    {
+                        label: 'Release Dashboard',
+                        icon: 'pi pi-fw pi-table',
+                        routerLink: ['/dashboard-analytics']
+                    },
+                    {
+                        label: 'Release Templates',
+                        icon: 'pi pi-fw pi-cog',
+                        routerLink: ['/dashboard-saas']
+                    },
+                ]
+            },
+            {
                 label: 'Apps',
                 icon: 'pi pi-th-large',
                 items: [
