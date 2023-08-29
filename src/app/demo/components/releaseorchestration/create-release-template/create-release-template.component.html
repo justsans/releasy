@@ -1,0 +1,80 @@
+<div class="block">
+<div class="h-100">
+<sqd-designer
+	theme="light"
+	[undoStackSize]="10"
+	[definition]="definition"
+	[toolboxConfiguration]="toolboxConfiguration"
+	[stepsConfiguration]="stepsConfiguration"
+	[validatorConfiguration]="validatorConfiguration"
+	[controlBar]="true"
+	[areEditorsHidden]="false"
+	[globalEditor]="globalEditor"
+	[stepEditor]="stepEditor"
+	(onReady)="onDesignerReady($event)"
+	(onDefinitionChanged)="onDefinitionChanged($event)"
+>
+</sqd-designer>
+
+<ng-template #globalEditor let-editor>
+	<h2>Global Editor</h2>
+
+	<h3>Component Name</h3>
+	<mat-form-field class="full-width">
+		<input
+			matInput
+			type="string"
+			[value]="editor.definition.properties.componentName"
+			(input)="updateProperty(editor.definition.properties, 'appId', $event, editor.context)"
+		/>
+	</mat-form-field>
+	<h3>AppId</h3>
+	<mat-form-field class="full-width">
+		<input
+			matInput
+			type="string"
+			[value]="editor.definition.properties.appId"
+			(input)="updateProperty(editor.definition.properties, 'appId', $event, editor.context)"
+		/>
+	</mat-form-field>
+</ng-template>
+
+<ng-template #stepEditor let-editor>
+	<h2>Step Editor</h2>
+
+	<mat-tab-group>
+		<mat-tab label="Basic">
+			<h3>Component Name</h3>
+			<mat-form-field class="full-width">
+				<input matInput type="text" [value]="editor.step.name" (input)="updateName(editor.step, $event, editor.context)" />
+			</mat-form-field>
+		</mat-tab>
+		<mat-tab label="Details">
+			<h3>AppId</h3>
+			<mat-form-field class="full-width">
+				<input
+					matInput
+					type="number"
+					[value]="editor.step.properties.appId"
+					(input)="updateProperty(editor.step.properties, 'appId', $event, editor.context)"
+				/>
+			</mat-form-field>
+		</mat-tab>
+	</mat-tab-group>
+</ng-template>
+</div>
+
+<!-- <div class="" style="display:grid">
+	<div class="w-25">
+		<button mat-raised-button color="primary" (click)="reloadDefinitionClicked()">Reload definition</button>
+		<span>&nbsp; Is valid: <strong>{{ isValid }}</strong>
+		</span>
+	</div>
+</div>
+
+<div class="h-15" style="display:grid">
+	<mat-form-field class="container-fluid" style="display:grid">
+		<textarea matInput cols="120" rows="16" readonly>{{ definitionJSON }}</textarea>
+	</mat-form-field>
+</div> -->
+</div>
