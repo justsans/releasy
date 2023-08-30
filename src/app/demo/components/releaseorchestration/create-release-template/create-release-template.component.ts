@@ -13,6 +13,16 @@ import {
 	ValidatorConfiguration
 } from 'sequential-workflow-designer';
 
+function createFirstStep(): Step {
+	return {
+		id: Uid.next(),
+		componentType: 'task',
+		name: 'Start Deployment',
+		properties: { details: 'You can add components and other tasks after the start step' },
+		type: 'task'
+	};
+}
+
 function createStep(): Step {
 	return {
 		id: Uid.next(),
@@ -28,12 +38,12 @@ function createParallelStep(): BranchedStep {
 		id: Uid.next(),
 		componentType: 'switch',
 		type: 'parallel',
-		name: 'parallel',
+		name: 'Parallel Deployment',
 		properties: {
 		},
 		branches: {
-			"Condition A": [createStep(), createStep()],
-			"Condition B": [createStep()]
+			"stage 1": [createStep()],
+			"Stage 2": [createStep()]
 		}
 	};
 }
@@ -48,12 +58,14 @@ function randomCondition() {
 function createDefinition(): Definition {
 	return {
 		properties: { componentName: 'sspd-api.shared-services', appId: 'AP134384' },
-		sequence: [createStep(), createStep(), createParallelStep()]
+		sequence: [createFirstStep()]
+		// sequence: [createFirstStep(), createStep(), createStep(), createParallelStep()]
 	};
 }
 
 @Component({
 	templateUrl: './create-release-template.component.html',
+	styleUrls: ['./create-release-template.component.scss'],
 	providers: []
 })
 export class CreateReleaseTemplateComponent implements OnInit {
@@ -117,5 +129,9 @@ export class CreateReleaseTemplateComponent implements OnInit {
 
 	private updateIsValid() {
 		this.isValid = this.designer?.isValid();
+	}
+
+	public saveTemplateDefinition() {
+		alert(this.definitionJSON)
 	}
 }
