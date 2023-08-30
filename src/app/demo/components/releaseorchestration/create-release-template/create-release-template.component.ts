@@ -65,7 +65,6 @@ function createDefinition(): Definition {
 
 @Component({
 	templateUrl: './create-release-template.component.html',
-	styleUrls: ['./create-release-template.component.scss'],
 	providers: []
 })
 export class CreateReleaseTemplateComponent implements OnInit {

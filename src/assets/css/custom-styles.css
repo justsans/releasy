@@ -1,0 +1,30 @@
+body, h1, select {font: 13px/1.3em 'Open Sans', Arial, Verdana, Serif; margin: 0; padding: 0;}
+
+.title-bar {display: flex; min-height: 40px; background: #242424; align-items: center; width: 100%; box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);}
+.title-bar, .title-bar a {color: #FFF; text-decoration: none;}
+.title-bar a:hover {text-decoration: underline;}
+.title-bar .column {padding: 0 10px;}
+.title-bar select, .title-bar button {background: #FFF; color: #000; border: 0; padding: 5px; border-radius: 5px;}
+.title-bar button {cursor: pointer;}
+
+.flex-1 {flex: 1;}
+.text-end {text-align: end;}
+
+html, body {width: 100vw; height: 100vh; overflow: hidden;}
+body {display: flex; flex-direction: column;}
+#designer {flex: 1;}
+.sqd-step-editor {padding: 10px;}
+.step-path {background: #FFCA6F; padding: 10px; margin: 10px 0;}
+.sqd-global-editor, .definition-json, .definition-json textarea {width: 100%; height: 100%;}
+#validationStatus {padding: 0 10px; font-size: 11px; color: #999;}
+
+
+.layout-content {
+	width: 100% !important;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+@media only screen and (max-width: 700px) {
+	.hidden-mobile {display: none;}
+}
