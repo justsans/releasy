@@ -8,42 +8,32 @@
 		</sqd-designer>
 
 		<ng-template #globalEditor let-editor>
-			<h2>Global Editor</h2>
-
-			<h3>Component Name</h3>
+			<h6>Template Properties</h6>
+			<br/>
+			<h6>Template Name</h6>
 			<mat-form-field class="full-width">
-				<input matInput type="string" [value]="editor.definition.properties.componentName"
-					(input)="updateProperty(editor.definition.properties, 'appId', $event, editor.context)" />
-			</mat-form-field>
-			<h3>AppId</h3>
-			<mat-form-field class="full-width">
-				<input matInput type="string" [value]="editor.definition.properties.appId"
-					(input)="updateProperty(editor.definition.properties, 'appId', $event, editor.context)" />
+				<input matInput type="string" [value]="editor.definition.properties.templateName"
+				(input)="updateProperty(editor.definition.properties, 'templateName', $event, editor.context)" />
 			</mat-form-field>
 		</ng-template>
 
 		<ng-template #stepEditor let-editor>
-			<h2>Step Editor</h2>
-
+			<h5>Step Properties</h5>
+			
 			<mat-tab-group>
-				<mat-tab label="Basic">
-					<h3>Component Name</h3>
-					<mat-form-field class="full-width">
-						<input matInput type="text" [value]="editor.step.name"
-							(input)="updateName(editor.step, $event, editor.context)" />
-					</mat-form-field>
-				</mat-tab>
-				<mat-tab label="Details">
-					<h3>AppId</h3>
-					<mat-form-field class="full-width">
-						<input matInput type="number" [value]="editor.step.properties.appId"
-							(input)="updateProperty(editor.step.properties, 'appId', $event, editor.context)" />
-					</mat-form-field>
+				<mat-tab label="Step Properties">
+					<div *ngFor="let property of editor.step.properties | keyvalue">
+						<h6> {{ property.key }}</h6>
+						<mat-form-field class="full-width">
+							<input matInput type="string" [value]="property['value']"
+							(input)="updateProperty(editor.step.properties, ''+property.key, $event, editor.context)" />
+						</mat-form-field>
+					</div>
 				</mat-tab>
 			</mat-tab-group>
 		</ng-template>
 	</div>
-	<button mat-raised-button color="primary" (click)="saveTemplateDefinition()">Save Release Template</button>
+	<div class="save-release-template"><button mat-raised-button color="primary" (click)="saveTemplateDefinition()">Save Release Template</button></div>
 	<!-- <div class="" style="display:grid">
 	<div class="w-25">
 		<button mat-raised-button color="primary" (click)="reloadDefinitionClicked()">Reload definition</button>

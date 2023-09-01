@@ -18,7 +18,9 @@ function createFirstStep(): Step {
 		id: Uid.next(),
 		componentType: 'task',
 		name: 'Start Deployment',
-		properties: { details: 'You can add components and other tasks after the start step' },
+		properties: { 
+			details: 'You can add components and other tasks after the start step' 
+		},
 		type: 'task'
 	};
 }
@@ -28,7 +30,12 @@ function createStep(): Step {
 		id: Uid.next(),
 		componentType: 'task',
 		name: 'Deploy Component',
-		properties: { componentName: 'sspd-api.shared-services', appId: 'AP134384' },
+		properties: { 
+			stepName: '', 
+			componentName: 'sspd-api.shared-services', 
+			pipeline: 'blue-green-acm', 
+			environment: 'prod', 
+		},
 		type: 'task'
 	};
 }
@@ -42,7 +49,7 @@ function createParallelStep(): BranchedStep {
 		properties: {
 		},
 		branches: {
-			"stage 1": [createStep()],
+			"Stage 1": [createStep()],
 			"Stage 2": [createStep()]
 		}
 	};
@@ -57,7 +64,9 @@ function randomCondition() {
 
 function createDefinition(): Definition {
 	return {
-		properties: { componentName: 'sspd-api.shared-services', appId: 'AP134384' },
+		properties: { 
+			templateName: ''
+		},
 		sequence: [createFirstStep()]
 		// sequence: [createFirstStep(), createStep(), createStep(), createParallelStep()]
 	};
@@ -67,6 +76,7 @@ function createDefinition(): Definition {
 	templateUrl: './create-release-template.component.html',
 	providers: []
 })
+
 export class CreateReleaseTemplateComponent implements OnInit {
 	private designer?: Designer;
 
@@ -86,8 +96,8 @@ export class CreateReleaseTemplateComponent implements OnInit {
 		iconUrlProvider: () => './assets/angular-icon.svg'
 	};
 	public readonly validatorConfiguration: ValidatorConfiguration = {
-		step: (step: Step) => !!step.name && step.properties['appId'] != '',
-		root: (definition: Definition) => definition.properties['appId'] != ''
+		step: (step: Step) => !!step.name && step.properties['stepName'] != '',
+		root: (definition: Definition) => definition.properties['templateName'] != ''
 	};
 
 	public ngOnInit() {

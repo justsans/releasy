@@ -35,11 +35,6 @@ export class AppMenuComponent implements OnInit {
                         label: 'Create New Template',
                         icon: 'pi pi-fw pi-plus-circle',
                         routerLink: ['/ro/create-release-template']
-                    },
-                    {
-                        label: 'New Template',
-                        icon: 'pi pi-fw pi-plus-',
-                        routerLink: ['/ro/release-template-builder']
                     }
                 ]
             },
