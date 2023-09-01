@@ -24,6 +24,23 @@ body {display: flex; flex-direction: column;}
 	margin: 0px !important;
 	padding: 0px !important;
 }
+.sqd-toolbox {
+	min-height: 220px;
+}
+.sqd-toolbox-body {
+	height: 100%;
+}
+.sqd-scrollbox {
+	height: 100%;
+	overflow: visible;
+}
+.ReleaseTemplate {
+	position: relative;
+}
+
+.sqd-workspace {
+	height: 80vh;
+}
 
 @media only screen and (max-width: 700px) {
 	.hidden-mobile {display: none;}
