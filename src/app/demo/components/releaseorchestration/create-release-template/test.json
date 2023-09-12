@@ -1,0 +1,141 @@
+{
+    "currentState": 
+
+{
+    "properties": {
+      "templateName": ""
+    },
+    "sequence": [
+      {
+        "id": "51404bcbc0bb3e87355a38cf07169c52",
+        "componentType": "task",
+        "name": "Start Deployment",
+        "status": "COMPLETE",
+        "properties": {
+          "details": "You can add components and other tasks after the start step"
+        },
+        "type": "task"
+      },
+      {
+        "id": "a130f36abf518ae57bb42c53a69eba34",
+        "componentType": "task",
+        "name": "Deploy Component",
+        "properties": {
+          "stepName": "",
+          "componentName": "sspd-api.shared-services",
+          "pipeline": "blue-green-acm",
+          "environment": "prod"
+        },
+        "type": "task",
+        "status": "COMPLETE"
+      },
+      {
+        "id": "cedcbc841f57ac09243221d392f265ae",
+        "componentType": "switch",
+        "type": "parallel",
+        "name": "Parallel Deployment",
+        "properties": {},
+        "branches": {
+          "Stage 1": [
+            {
+              "id": "72bcea2b6a78a89fa4dd6befc001b12d",
+              "componentType": "task",
+              "name": "Deploy Component",
+              "properties": {
+                "stepName": "",
+                "componentName": "sspd-api.shared-services",
+                "pipeline": "blue-green-acm",
+                "environment": "prod"
+              },
+              "type": "task"
+            }
+          ],
+          "Stage 2": [
+            {
+              "id": "5b4e0fa54eade5aec0586e322a4cdffc",
+              "componentType": "task",
+              "name": "Deploy Component",
+              "properties": {
+                "stepName": "",
+                "componentName": "sspd-api.shared-services",
+                "pipeline": "blue-green-acm",
+                "environment": "prod"
+              },
+              "type": "task"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+
+
+    "intialState": 
+
+{
+    "properties": {
+      "templateName": ""
+    },
+    "sequence": [
+      {
+        "id": "51404bcbc0bb3e87355a38cf07169c52",
+        "componentType": "task",
+        "name": "Start Deployment",
+        "properties": {
+          "details": "You can add components and other tasks after the start step"
+        },
+        "type": "task"
+      },
+      {
+        "id": "a130f36abf518ae57bb42c53a69eba34",
+        "componentType": "task",
+        "name": "Deploy Component",
+        "properties": {
+          "stepName": "",
+          "componentName": "sspd-api.shared-services",
+          "pipeline": "blue-green-acm",
+          "environment": "prod"
+        },
+        "type": "task"
+      },
+      {
+        "id": "cedcbc841f57ac09243221d392f265ae",
+        "componentType": "switch",
+        "type": "parallel",
+        "name": "Parallel Deployment",
+        "properties": {},
+        "branches": {
+          "Stage 1": [
+            {
+              "id": "72bcea2b6a78a89fa4dd6befc001b12d",
+              "componentType": "task",
+              "name": "Deploy Component",
+              "properties": {
+                "stepName": "",
+                "componentName": "sspd-api.shared-services",
+                "pipeline": "blue-green-acm",
+                "environment": "prod"
+              },
+              "type": "task"
+            }
+          ],
+          "Stage 2": [
+            {
+              "id": "5b4e0fa54eade5aec0586e322a4cdffc",
+              "componentType": "task",
+              "name": "Deploy Component",
+              "properties": {
+                "stepName": "",
+                "componentName": "sspd-api.shared-services",
+                "pipeline": "blue-green-acm",
+                "environment": "prod"
+              },
+              "type": "task"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

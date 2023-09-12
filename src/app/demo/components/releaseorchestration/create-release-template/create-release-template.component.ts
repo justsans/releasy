@@ -141,6 +141,7 @@ export class CreateReleaseTemplateComponent implements OnInit {
 	}
 
 	public saveTemplateDefinition() {
-		alert(this.definitionJSON)
+		alert(this.definitionJSON);
+		console.log(this.definitionJSON);
 	}
 }

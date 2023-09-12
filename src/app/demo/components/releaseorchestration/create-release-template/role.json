@@ -1,0 +1,173 @@
+{
+    "accountNumber": "763378775812",
+    "region": "us-east-1",
+    "stackName": "AP134384-sspd-appsync",
+    "cft": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "This is a baseline sample template for creating an IAM Role via Cloudformation.",
+        "Parameters": {
+          "RoleName": {
+            "Description": "Name of the Role using the Managed Policy",
+            "Type": "String",
+            "Default": "ro-appsync-readwrite"
+          },
+          "Path": {
+            "Description": "The path for the policy.",
+            "Default": "/",
+            "Type": "String"
+          },
+          "ApplicationId": {
+            "Description": "The Application ID on the role.",
+            "Type": "String",
+            "Default": "AP134384"
+          }
+        },
+        "Resources": {
+          "BaselineSampleRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Federated": [
+                        {
+                          "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:saml-provider/PingFederatePROD"
+                        }
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRoleWithSAML"
+                    ],
+                    "Condition": {
+                      "StringEquals": {
+                        "SAML:aud": "https://signin.aws.amazon.com/saml"
+                      }
+                    }
+                  }
+                ]
+              },
+              "ManagedPolicyArns": [
+                {
+                  "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:policy/IAM_Allow_Policy"
+                },
+                {
+                  "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:policy/IAM_Deny_Policy"
+                }
+              ],
+              "Tags": [
+                {
+                  "Key": "applicationid",
+                  "Value": {
+                    "Ref": "ApplicationId"
+                  }
+                }
+              ],
+              "RoleName": {
+                "Ref": "RoleName"
+              }
+            }
+          },
+          "BaselineSampleManagedPolicy": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+              "Path": {
+                "Ref": "Path"
+              },
+              "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Sid": "AppsyncRead",
+                    "Effect": "Allow",
+                    "Action": [
+                      "appsync:GetApiCache",
+                      "appsync:GetDataSource",
+                      "appsync:GetFunction",
+                      "appsync:GetGraphqlApi",
+                      "appsync:GetIntrospectionSchema",
+                      "appsync:GetResolver",
+                      "appsync:GetSchemaCreationStatus",
+                      "appsync:GetType",
+                      "appsync:ListTagsForResource"
+                    ],
+                    "Resource": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "Sid": "AppsyncWrite",
+                    "Effect": "Allow",
+                    "Action": [
+                      "appsync:CreateApiCache",
+                      "appsync:CreateApiKey",
+                      "appsync:CreateDataSource",
+                      "appsync:CreateFunction",
+                      "appsync:CreateGraphqlApi",
+                      "appsync:CreateResolver",
+                      "appsync:CreateType",
+                      "appsync:DeleteApiCache",
+                      "appsync:DeleteApiKey",
+                      "appsync:DeleteDataSource",
+                      "appsync:DeleteFunction",
+                      "appsync:DeleteGraphqlApi",
+                      "appsync:DeleteResolver",
+                      "appsync:DeleteType",
+                      "appsync:FlushApiCache",
+                      "appsync:GraphQL",
+                      "appsync:SetWebACL",
+                      "appsync:StartSchemaCreation",
+                      "appsync:UpdateApiCache",
+                      "appsync:UpdateApiKey",
+                      "appsync:UpdateDataSource",
+                      "appsync:UpdateFunction",
+                      "appsync:UpdateGraphqlApi",
+                      "appsync:UpdateResolver",
+                      "appsync:UpdateType"
+                    ],
+                    "Resource": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "Sid": "AppsyncList",
+                    "Effect": "Allow",
+                    "Action": [
+                      "appsync:ListApiKeys",
+                      "appsync:ListDataSources",
+                      "appsync:ListFunctions",
+                      "appsync:ListGraphqlApis",
+                      "appsync:ListResolvers",
+                      "appsync:ListResolversByFunction",
+                      "appsync:ListTypes"
+                    ],
+                    "Resource": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "Sid": "AppsyncTagging",
+                    "Effect": "Allow",
+                    "Action": [
+                      "appsync:TagResource",
+                      "appsync:UntagResource"
+                    ],
+                    "Resource": [
+                      "*"
+                    ]
+                  }
+                ]
+              },
+              "Roles": [
+                {
+                  "Ref": "RoleName"
+                }
+              ]
+            }
+          }
+        }
+      }
+  }
+
+
